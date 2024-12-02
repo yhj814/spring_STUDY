@@ -1,0 +1,31 @@
+server:
+  port: 10000
+  servlet:
+    session:
+      tracking-modes: cookie
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=Asia/Seoul
+    username: spring
+    password: 1234
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: create # DROP 후 CREATE
+#      ddl-auto: create-drop # DROP 후 CREATE 그리고 DROP, DML을 사용해야 마지막에 DROP된다.
+#      ddl-auto: update # Entity와 DB 스키마를 비교한 후 수정 사항 반영(컬럼 추가)
+#      ddl-auto: validate # Entity와 DB 스키마를 비교한 후 서로 다르면 예외 발생
+    properties:
+      hibernate:
+        format_sql: true
+
+mybatis:
+  config-location: classpath:/config/config.xml
+  mapper-locations: classpath*:/mapper/*.xml
+
+

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>제품목록</title>
+  <style>
+    body {
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    table {
+      width: 50%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    td {
+      color: #333;
+    }
+
+  </style>
+</head>
+<body>
+<button id="go-update">제품수정하기</button>
+<button id="go-delete">제품삭제하기</button>
+<table th:object="${marketDTO}">
+  <tr>
+    <th>제품명</th>
+    <th>제품번호</th>
+  </tr>
+  <tr>
+    <td id="productName"></td>
+    <td id="productNumber"></td>
+  </tr>
+</table>
+</body>
+<script th:inline="javascript">
+  const marketDTO = [[${marketDTO}]];
+  const productName = document.getElementById("productName");
+  const productNumber = document.getElementById("productNumber");
+
+  productName.innerText = marketDTO.productName;
+  productNumber.innerText = marketDTO.productNumber;
+
+  document.getElementById("go-update").addEventListener("click", (e) => {
+    location.href = `/market/update?id=${marketDTO.id}`;
+  });
+
+  document.getElementById("go-delete").addEventListener("click", (e) => {
+    location.href = `/market/delete?id=${marketDTO.id}`;
+    alert("제품이 삭제되었습니다");
+  });
+</script>
+</html>
+
+
+
+
+
+
+
+

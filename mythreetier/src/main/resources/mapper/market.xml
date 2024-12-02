@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.threetier.mapper.MarketMapper">
+    <insert id="insert">
+        INSERT INTO TBL_MARKET
+        VALUES (SEQ_MARKET.NEXTVAL, #{marketName}, #{productName}, #{productNumber})
+    </insert>
+
+    <select id="selectByProductNameAndProductNumber" resultType="marketVO">
+        SELECT ID, PRODUCT_NAME, PRODUCT_NUMBER FROM TBL_MARKET
+        WHERE PRODUCT_NAME = #{productName} AND PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+    <select id="selectById" resultType="marketVO">
+        SELECT ID, MARKET_NAME, PRODUCT_NAME, PRODUCT_NUMBER
+        FROM TBL_MARKET
+        WHERE ID = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_MARKET
+        SET PRODUCT_NAME = #{productName}, PRODUCT_NUMBER = #{productNumber}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_MARKET
+        WHERE ID = #{id}
+    </delete>
+</mapper>

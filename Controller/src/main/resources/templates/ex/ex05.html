@@ -1,0 +1,33 @@
+<!--1번방법-->
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport"-->
+<!--        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--  <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--  <title>EX05</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1 th:text="${userDTO.name}"></h1>-->
+<!--<h2 th:text="${userDTO.age}"></h2>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--2번방법-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EX05</title>
+</head>
+<!--위에 태그에 object로 묶어 놓으면 자식태그에서 *{} 로 사용할 수 있고 방식은 ' ' + 로 연결하는것과 || 안에 넣는거 편한것을 쓰면된다-->
+<!--컨테이너에서 전달받은 userDTO 이거는 컨테이너 UserDTO 앞글자를 소문자로 바꾼것이다-->
+<body th:object="${userDTO}">
+<h1 th:text="'이름: ' + *{name}"></h1>
+<h2 th:text="|나이: *{age}살|"></h2>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mybatis.mapper.task.PlaceMapper">
+    <insert id="insert">
+        INSERT INTO TBL_PLACE (ID, PLACE_DETAIL, PLACE_NAME, PLACE_PRICE)
+        VALUES (SEQ_PLACE.NEXTVAL, #{placeDetail}, #{placeName}, #{placePrice})
+    </insert>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mybatis.mapper.ReplyMapper">
+<!--댓글 작성-->
+    <insert id="insert">
+        INSERT INTO TBL_REPLY(ID, POST_ID, MEMBER_ID, REPLY_CONTENT, GROUP_ID)
+        VALUES(SEQ_REPLY.NEXTVAL, #{postId}, #{memberId}, #{replyContent},
+        <if test="groupId != null">#{groupId} </if>
+        <if test="groupId == null"> NULL </if>)
+    </insert>
+<!--대댓글 작성-->
+    <insert id="insertReply">
+        INSERT INTO TBL_REPLY(ID, POST_ID, MEMBER_ID, REPLY_CONTENT, GROUP_ID, REPLY_DEPTH)
+        VALUES (SEQ_REPLY.NEXTVAL, #{postId}, #{memberId}, #{replyContent}, #{groupId}, #{replyDepth})
+    </insert>
+
+<!-- 댓글 목록 전체 조회-->
+    <select id="selectReplyAll" resultType="replyDTO">
+        SELECT ID, POST_ID, MEMBER_ID, REPLY_CONTENT, GROUP_ID, REPLY_DEPTH, CREATED_DATE, UPDATED_DATE
+        FROM TBL_REPLY
+        WHERE REPLY_DEPTH=0
+    </select>
+
+<!--대댓글 목록 전체 조회-->
+    <select id="selectInsertReplyAll" resultType="replyDTO">
+        SELECT ID, POST_ID, MEMBER_ID, REPLY_CONTENT, GROUP_ID, REPLY_DEPTH, CREATED_DATE, UPDATED_DATE
+        FROM TBL_REPLY
+        WHERE REPLY_DEPTH=1
+    </select>
+
+<!--댓글 수정-->
+    <update id="updateReply">
+        UPDATE TBL_REPLY
+        SET REPLY_CONTENT = #{replyContent}, UPDATED_DATE =CURRENT_TIMESTAMP
+        WHERE ID = #{id}
+    </update>
+
+<!--댓글 삭제-->
+    <delete id="deleteReply">
+        DELETE TBL_REPLY
+        WHERE ID = #{id}
+    </delete>
+</mapper>
